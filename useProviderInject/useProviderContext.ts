@@ -82,7 +82,7 @@ export function useProviderContext(
           isReactive(context[key]) &&
           Object.prototype.toString.call(value) === '[object Object]'
         ) {
-          context[key] = reactive(value);
+          Object.assign(context[key], value);
         } else {
           throw new Error(`Invalid type: ${argObj.key}`);
         }
