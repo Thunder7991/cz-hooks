@@ -2,6 +2,16 @@
 
 Vue 3 composition hooks packaged as a Vite library.
 
+## Hooks
+
+| Hook | Import | Description |
+| --- | --- | --- |
+| [useGeolocation](./useGeolocation/README.md) | `cz-hooks/useGeolocation` | Browser geolocation hook with WGS84 and GCJ-02 coordinate state. |
+| [useDdGeolocation](./useGeolocation/README.md#dingtalk-geolocation) | `cz-hooks/useDdGeolocation` | DingTalk JSAPI geolocation hook. Requires `dingtalk-jsapi`. |
+| [useHighPrecisionTimer](./useHighPrecisionTimer/README.md) | `cz-hooks/useHighPrecisionTimer` | High precision countdown timer based on `performance.now()` and `requestAnimationFrame`. |
+| [useProviderInject](./useProviderInject/README.md) | `cz-hooks/useProviderInject` | Vue provide/inject helpers for shared composition state. |
+| [useUpdater](./useUpdater/README.md) | `cz-hooks/useUpdater` | Static asset update detection helper for deployed SPAs. |
+
 ## Install
 
 ```bash
@@ -39,4 +49,32 @@ npm install dingtalk-jsapi
 import { useDdGeolocation } from 'cz-hooks/useDdGeolocation';
 ```
 
-See `useGeolocation/README.md` and `useProviderInject/README.md` for hook-specific notes.
+## Add A New Hook
+
+Create a new folder with an `index.ts` entry:
+
+```text
+useNewHook/
+  index.ts
+  README.md
+```
+
+Export the hook from `useNewHook/index.ts`:
+
+```ts
+export function useNewHook() {
+  // ...
+}
+```
+
+The build automatically scans `use*/index.ts`, so subpath imports work without editing `vite.config.ts` or `package.json`:
+
+```ts
+import { useNewHook } from 'cz-hooks/useNewHook';
+```
+
+Only edit the root `index.ts` when you also want to support this style:
+
+```ts
+import { useNewHook } from 'cz-hooks';
+```

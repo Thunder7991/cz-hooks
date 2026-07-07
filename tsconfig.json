@@ -18,11 +18,7 @@
   },
   "include": [
     "index.ts",
-    "types/**/*.d.ts",
-    "useGeolocation/**/*.ts",
-    "useHighPrecisionTimer/**/*.ts",
-    "useProviderInject/**/*.ts",
-    "useUpdater/**/*.ts"
+    "use*/**/*.ts"
   ],
   "exclude": ["dist", "node_modules"]
 }
