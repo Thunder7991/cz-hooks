@@ -36,8 +36,10 @@ export function useProviderContext(
     for (let i = 0; i < provideConfig.length; i++) {
       const { key, value, type }: argsType = provideConfig[i];
       const validateKey = !(!key || typeof key !== 'string');
-      const validateValue = !!value;
       const validateType = !(!type || typeof type !== 'string' || !staticProxy.includes(type));
+      const hasValue = Object.prototype.hasOwnProperty.call(provideConfig[i], 'value');
+      const validateValue =
+        hasValue && (type !== 'reactive' || (value !== null && typeof value === 'object'));
       if (!validateKey || !validateValue || !validateType) {
         console.error('useProviderContext error');
         continue;

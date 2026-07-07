@@ -19,50 +19,70 @@ import {
   onUnmounted,
 } from 'vue';
 
-const createFunctions = {
-  ref: () => ref<any>({}),
-  reactive: () => reactive<any>({}),
-  shallowRef: () => shallowRef<any>({}),
+type RefType = 'ref' | 'reactive' | 'shallowRef';
+type ContextState = Ref<any> | Record<string, any>;
+type InjectedContext = Record<string, ContextState>;
+
+const isObject = (value: unknown): value is Record<string, any> => {
+  return value !== null && typeof value === 'object';
 };
 
-type ExtendedRef<T> = Ref<T> & { __v_isShallow?: boolean; __v_isRef?: boolean };
+const createFunctions: Record<RefType, (value?: any) => ContextState> = {
+  ref: (value: any = {}) => ref<any>(value),
+  reactive: (value: any = {}) =>
+    reactive<any>(Array.isArray(value) ? [...value] : isObject(value) ? { ...value } : {}),
+  shallowRef: (value: any = {}) => shallowRef<any>(value),
+};
+
+const replaceReactiveState = (target: Record<string, any>, value: Record<string, any>) => {
+  if (Array.isArray(target) && Array.isArray(value)) {
+    target.splice(0, target.length, ...value);
+    return;
+  }
+  Object.keys(target).forEach((key) => {
+    delete target[key];
+  });
+  Object.assign(target, value);
+};
 // stateRef:需要注入的依赖[]
 // 依赖key值 symbol
 export function useInjectContext(
-  PIkey: InjectionKey<Record<string, ExtendedRef<any>>>,
+  PIkey: InjectionKey<InjectedContext>,
   stateRef: string[],
-  refType?: ('ref' | 'reactive' | 'shallowRef')[],
+  refType?: RefType[],
 ) {
   if (!stateRef.length) {
     return [];
   }
   let temporaryData: any = [];
   let temporaryKey: any = [];
-  let Refs: ExtendedRef<any>[] = [];
+  let Refs: ContextState[] = [];
   const injectRefs = inject(PIkey);
   let i = 1;
   for (const item of stateRef) {
     if (injectRefs) {
       temporaryData.push(() => unref(injectRefs![item]));
       temporaryKey.push('nv' + i);
-      const contextRef = refType ? (createFunctions[refType[i - 1]]() as any) : ref<any>({});
+      const currentValue = unref(injectRefs[item]);
+      const type = refType?.[i - 1] ?? 'ref';
+      const contextRef = createFunctions[type](currentValue);
       i++;
       Refs.push(contextRef);
     }
   }
   watch(
     temporaryData,
-    (temporaryKey) => {
+    (values) => {
       //数据重组 key
-      for (let i = 0; i < stateRef.length; i++) {
-        if (isRef(Refs[i]) && (Refs[i].__v_isShallow == true || Refs[i].__v_isRef == true)) {
-          Refs[i].value = temporaryKey[i];
-        } else if (isReactive(Refs[i])) {
-          if (Object.prototype.toString.call(Refs[i]) === '[object Object]') {
-            Refs[i] = reactive(temporaryKey[i]);
-          } else {
-            Refs[i] = ref(temporaryKey[i]);
-          }
+      for (let i = 0; i < Refs.length; i++) {
+        const target = Refs[i];
+        const value = values[i];
+        if (isRef(target)) {
+          target.value = value;
+          continue;
+        }
+        if (isReactive(target) && isObject(value)) {
+          replaceReactiveState(target, value);
         }
       }
     },
