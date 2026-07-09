@@ -18,7 +18,7 @@
   },
   "include": [
     "index.ts",
-    "use*/**/*.ts"
+    "core/use*/**/*.ts"
   ],
   "exclude": ["dist", "node_modules"]
 }

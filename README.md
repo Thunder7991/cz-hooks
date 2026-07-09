@@ -6,11 +6,11 @@ Vue 3 composition hooks packaged as a Vite library.
 
 | Hook | Import | Description |
 | --- | --- | --- |
-| [useGeolocation](./useGeolocation/README.md) | `cz-hooks/useGeolocation` | Browser geolocation hook with WGS84 and GCJ-02 coordinate state. |
-| [useDdGeolocation](./useGeolocation/README.md#dingtalk-geolocation) | `cz-hooks/useDdGeolocation` | DingTalk JSAPI geolocation hook. Requires `dingtalk-jsapi`. |
-| [useHighPrecisionTimer](./useHighPrecisionTimer/README.md) | `cz-hooks/useHighPrecisionTimer` | High precision countdown timer based on `performance.now()` and `requestAnimationFrame`. |
-| [useProviderInject](./useProviderInject/README.md) | `cz-hooks/useProviderInject` | Vue provide/inject helpers for shared composition state. |
-| [useUpdater](./useUpdater/README.md) | `cz-hooks/useUpdater` | Static asset update detection helper for deployed SPAs. |
+| [useGeolocation](./core/useGeolocation/README.md) | `cz-hooks/useGeolocation` | Browser geolocation hook with WGS84 and GCJ-02 coordinate state. |
+| [useDdGeolocation](./core/useGeolocation/README.md#dingtalk-geolocation) | `cz-hooks/useDdGeolocation` | DingTalk JSAPI geolocation hook. Requires `dingtalk-jsapi`. |
+| [useHighPrecisionTimer](./core/useHighPrecisionTimer/README.md) | `cz-hooks/useHighPrecisionTimer` | High precision countdown timer based on `performance.now()` and `requestAnimationFrame`. |
+| [useProviderInject](./core/useProviderInject/README.md) | `cz-hooks/useProviderInject` | Vue provide/inject helpers for shared composition state. |
+| [useUpdater](./core/useUpdater/README.md) | `cz-hooks/useUpdater` | Static asset update detection helper for deployed SPAs. |
 
 ## Install
 
@@ -54,12 +54,13 @@ import { useDdGeolocation } from 'cz-hooks/useDdGeolocation';
 Create a new folder with an `index.ts` entry:
 
 ```text
-useNewHook/
-  index.ts
-  README.md
+core/
+  useNewHook/
+    index.ts
+    README.md
 ```
 
-Export the hook from `useNewHook/index.ts`:
+Export the hook from `core/useNewHook/index.ts`:
 
 ```ts
 export function useNewHook() {
@@ -67,7 +68,7 @@ export function useNewHook() {
 }
 ```
 
-The build automatically scans `use*/index.ts`, so subpath imports work without editing `vite.config.ts` or `package.json`:
+The build automatically scans `core/use*/index.ts`, so subpath imports work without editing `vite.config.ts` or `package.json`:
 
 ```ts
 import { useNewHook } from 'cz-hooks/useNewHook';

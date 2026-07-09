@@ -7,17 +7,18 @@ import dts from 'vite-plugin-dts';
 const root = fileURLToPath(new URL('.', import.meta.url));
 
 const entry = (path: string) => resolve(root, path);
+const coreRoot = entry('core');
 
 const hookEntries = Object.fromEntries(
-  readdirSync(root, { withFileTypes: true })
+  readdirSync(coreRoot, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory() && /^use[A-Z]/.test(dirent.name))
-    .filter((dirent) => existsSync(entry(`${dirent.name}/index.ts`)))
-    .map((dirent) => [`${dirent.name}/index`, entry(`${dirent.name}/index.ts`)]),
+    .filter((dirent) => existsSync(entry(`core/${dirent.name}/index.ts`)))
+    .map((dirent) => [`${dirent.name}/index`, entry(`core/${dirent.name}/index.ts`)]),
 );
 
 const optionalEntries = {
-  ...(existsSync(entry('useGeolocation/dd.ts'))
-    ? { 'useGeolocation/dd': entry('useGeolocation/dd.ts') }
+  ...(existsSync(entry('core/useGeolocation/dd.ts'))
+    ? { 'useGeolocation/dd': entry('core/useGeolocation/dd.ts') }
     : {}),
 };
 
@@ -26,7 +27,7 @@ export default defineConfig({
     dts({
       entryRoot: '.',
       outDir: 'dist',
-      include: ['index.ts', 'use*/**/*.ts'],
+      include: ['index.ts', 'core/use*/**/*.ts'],
     }),
   ],
   build: {

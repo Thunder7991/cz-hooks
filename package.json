@@ -10,7 +10,7 @@
   "files": [
     "dist",
     "README.md",
-    "use*/README.md"
+    "core/use*/README.md"
   ],
   "exports": {
     ".": {
@@ -19,13 +19,13 @@
       "require": "./dist/index.cjs"
     },
     "./useDdGeolocation": {
-      "types": "./dist/useGeolocation/dd.d.ts",
+      "types": "./dist/core/useGeolocation/dd.d.ts",
       "import": "./dist/useGeolocation/dd.js",
       "require": "./dist/useGeolocation/dd.cjs"
     },
     "./package.json": "./package.json",
     "./*": {
-      "types": "./dist/*/index.d.ts",
+      "types": "./dist/core/*/index.d.ts",
       "import": "./dist/*/index.js",
       "require": "./dist/*/index.cjs"
     }
