@@ -1,5 +1,5 @@
 {
-  "name": "cz-hooks",
+  "name": "vue-hooks-cz",
   "version": "0.0.1",
   "description": "Reusable Vue 3 composition hooks.",
   "type": "module",

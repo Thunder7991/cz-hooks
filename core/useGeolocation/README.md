@@ -14,7 +14,7 @@ Geolocation hooks for browser and DingTalk environments.
 No extra dependency is required except Vue. Use this when the app runs in a normal browser environment.
 
 ```ts
-import { useGeolocation } from 'cz-hooks/useGeolocation';
+import { useGeolocation } from 'vue-hooks-cz/useGeolocation';
 
 const {
   loading,
@@ -40,7 +40,7 @@ npm install dingtalk-jsapi
 Then import it explicitly:
 
 ```ts
-import { useDdGeolocation } from 'cz-hooks/useDdGeolocation';
+import { useDdGeolocation } from 'vue-hooks-cz/useDdGeolocation';
 
 const location = useDdGeolocation({
   url: '/api/dingtalk/jsapi-signature',

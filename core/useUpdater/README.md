@@ -18,7 +18,7 @@ No extra dependency is required.
 ## Usage
 
 ```ts
-import { useUpdater } from 'cz-hooks/useUpdater';
+import { useUpdater } from 'vue-hooks-cz/useUpdater';
 
 const [onNoUpdate, onUpdate] = useUpdater(10_000, '/');
 

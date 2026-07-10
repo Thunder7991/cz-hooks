@@ -20,7 +20,7 @@ npm install vue
 ## Usage
 
 ```ts
-import { useHighPrecisionTimer } from 'cz-hooks/useHighPrecisionTimer';
+import { useHighPrecisionTimer } from 'vue-hooks-cz/useHighPrecisionTimer';
 
 const {
   remaining,

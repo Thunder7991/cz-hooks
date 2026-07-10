@@ -21,7 +21,7 @@ Auto scroll hook for Element Plus `el-scrollbar`.
 
 This hook is designed for projects that already use Element Plus `el-scrollbar`.
 
-No extra package is required by `cz-hooks`, but your application should install Element Plus when using this hook:
+No extra package is required by `vue-hooks-cz`, but your application should install Element Plus when using this hook:
 
 ```bash
 npm install element-plus
@@ -43,7 +43,7 @@ import { ref } from 'vue';
 import {
   useElAutoScroll,
   type AutoScrollScrollbar,
-} from 'cz-hooks/useElAutoScroll';
+} from 'vue-hooks-cz/useElAutoScroll';
 
 const ScrollbarRef = ref<AutoScrollScrollbar>();
 const ContentRef = ref<HTMLElement>();

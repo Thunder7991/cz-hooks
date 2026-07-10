@@ -7,7 +7,7 @@
  */
 
 import { ref, reactive } from 'vue';
-// @ts-ignore optional peer dependency for cz-hooks/useDdGeolocation consumers.
+// @ts-ignore optional peer dependency for vue-hooks-cz/useDdGeolocation consumers.
 import * as dd from 'dingtalk-jsapi';
 export const transformWGS84ToGCJ02 = (lng, lat) => {
   const a = 6378245.0; // 长半轴

@@ -20,7 +20,7 @@ npm install vue
 ## Usage
 
 ```ts
-import { useProviderContext, useInjectContext } from 'cz-hooks/useProviderInject';
+import { useProviderContext, useInjectContext } from 'vue-hooks-cz/useProviderInject';
 ```
 
 Use the same `InjectionKey` for provider and consumer components.
