@@ -7,6 +7,7 @@ Vue 3 composition hooks packaged as a Vite library.
 | Hook | Import | Description |
 | --- | --- | --- |
 | [useElAutoScroll](./core/useElAutoScroll/README.md) | `vue-hooks-cz/useElAutoScroll` | Auto scroll hook for Element Plus `el-scrollbar`, with bottom-to-top reset. |
+| [useElTableAutoScroll](./core/useElTableAutoScroll/README.md) | `vue-hooks-cz/useElTableAutoScroll` | Auto scroll hook for Element Plus `el-table`, with table body detection and refresh support. |
 | [useGeolocation](./core/useGeolocation/README.md) | `vue-hooks-cz/useGeolocation` | Browser geolocation hook with WGS84 and GCJ-02 coordinate state. |
 | [useDdGeolocation](./core/useGeolocation/README.md#dingtalk-geolocation) | `vue-hooks-cz/useDdGeolocation` | DingTalk JSAPI geolocation hook. Requires `dingtalk-jsapi`. |
 | [useHighPrecisionTimer](./core/useHighPrecisionTimer/README.md) | `vue-hooks-cz/useHighPrecisionTimer` | High precision countdown timer based on `performance.now()` and `requestAnimationFrame`. |
@@ -24,6 +25,7 @@ npm install vue-hooks-cz vue
 ```ts
 import {
   useElAutoScroll,
+  useElTableAutoScroll,
   useGeolocation,
   useHighPrecisionTimer,
   useProviderContext,
@@ -36,6 +38,7 @@ Subpath imports are also available:
 
 ```ts
 import { useElAutoScroll } from 'vue-hooks-cz/useElAutoScroll';
+import { useElTableAutoScroll } from 'vue-hooks-cz/useElTableAutoScroll';
 import { useGeolocation } from 'vue-hooks-cz/useGeolocation';
 import { useProviderContext } from 'vue-hooks-cz/useProviderInject';
 import { useHighPrecisionTimer } from 'vue-hooks-cz/useHighPrecisionTimer';

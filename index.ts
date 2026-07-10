@@ -1,4 +1,5 @@
 export * from './core/useElAutoScroll';
+export * from './core/useElTableAutoScroll';
 export * from './core/useGeolocation';
 export * from './core/useProviderInject';
 export * from './core/useUpdater';
