@@ -11,6 +11,7 @@ export interface UseElAutoScrollOptions {
   speed?: number;
   pauseOnHover?: boolean;
   immediate?: boolean;
+  onReachBottom?: () => void;
 }
 
 export interface UseElAutoScrollReturn {
@@ -108,6 +109,7 @@ export function useElAutoScroll(
         currentScrollTop = Math.max(currentScrollTop, wrap.scrollTop);
 
         if (currentScrollTop >= maxScrollTop) {
+          options.onReachBottom?.();
           currentScrollTop = 0;
           setScrollTop(0);
         }

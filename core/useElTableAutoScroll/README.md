@@ -7,6 +7,7 @@ Auto scroll hook for Element Plus `el-table`.
 - Finds the table body scroll wrapper from an Element Plus table instance or table root element.
 - Reuses `useElAutoScroll` to scroll the table body with `requestAnimationFrame`.
 - Resets to the top automatically when the table body reaches the bottom.
+- Calls `onReachBottom` once each time the table body reaches the bottom.
 - Pauses while the user hovers over the table body by default.
 - Exposes `refresh` for tables rendered after data, column, or layout changes.
 
@@ -71,6 +72,7 @@ watch(rows, async () => {
 | `speed` | `number` | `1` | Scroll distance added on every animation frame. Fractional values are supported. |
 | `pauseOnHover` | `boolean` | `true` | Whether to pause while the user hovers over the table body. |
 | `immediate` | `boolean` | `true` | Whether to start scrolling automatically after mount. |
+| `onReachBottom` | `() => void` | `undefined` | Called once each time scrolling reaches the bottom before resetting to the top. |
 
 ## Return
 

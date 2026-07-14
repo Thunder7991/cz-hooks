@@ -6,6 +6,7 @@ Auto scroll hook for Element Plus `el-scrollbar`.
 
 - Scrolls an `el-scrollbar` content area with `requestAnimationFrame`.
 - Resets to the top automatically when the content reaches the bottom.
+- Calls `onReachBottom` once each time the content reaches the bottom.
 - Pauses while the user hovers over the scrollbar by default.
 - Cleans up animation frames and hover listeners when the component unmounts.
 - Exposes `start`, `stop`, and `reset` methods for manual control.
@@ -51,7 +52,12 @@ const ContentRef = ref<HTMLElement>();
 const { start, stop, reset, isRunning, isHovering } = useElAutoScroll(
   ScrollbarRef,
   ContentRef,
-  { speed: 0.1 },
+  {
+    speed: 0.1,
+    onReachBottom: () => {
+      // load more data or notify consumers
+    },
+  },
 );
 </script>
 ```
@@ -63,6 +69,7 @@ const { start, stop, reset, isRunning, isHovering } = useElAutoScroll(
 | `speed` | `number` | `1` | Scroll distance added on every animation frame. Fractional values are supported. |
 | `pauseOnHover` | `boolean` | `true` | Whether to pause while the user hovers over the scrollbar. |
 | `immediate` | `boolean` | `true` | Whether to start scrolling automatically after mount. |
+| `onReachBottom` | `() => void` | `undefined` | Called once each time scrolling reaches the bottom before resetting to the top. |
 
 ## Return
 
